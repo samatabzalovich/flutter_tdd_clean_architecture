@@ -14,10 +14,10 @@ void main() {
     repository = MockAuthRepo();
     usecase = GetUserUseCase(repository);
   });
-  const tResponse = [const User.empty()];
+  const tResponse = [ User.empty()];
   test("should call [AuthRepo.getUsers] and return [List<Users>]", () async {
     // Arrange
-    when(() => repository.getUsers()).thenAnswer((_) async => Right(tResponse));
+    when(() => repository.getUsers()).thenAnswer((_) async => const Right(tResponse));
     //ACT
     final result = await usecase();
     expect(result, equals(const Right<dynamic, List<User>>(tResponse)));
