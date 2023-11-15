@@ -37,6 +37,8 @@ class AuthRemoteDataSrcImpl implements AuthenticationRemoteDataSource {
             "avatar": avatar,
           },
         ),
+        headers:{'Content-Type': 'application/json'}
+
       );
       if (response.statusCode != 200 && response.statusCode != 201) {
         throw (ApiException(
