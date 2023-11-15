@@ -100,32 +100,22 @@ void main() {
       verifyNoMoreInteractions(client);
     });
 
-    // test("should throw [ApiException] when the status code is not 200 or 201",
-    //     () {
-    //   when(
-    //     () => client.post(any(), body: any(named: "body")),
-    //   ).thenAnswer(
-    //     (_) async => http.Response("Invalid email address", 400),
-    //   );
-    //   final methodCall = remoteDataSource.createUser;
+    test("should throw [ApiException] when the status code is not 200 or 201",
+        () {
+      when(
+        () => client.get(any()),
+      ).thenAnswer(
+        (_) async => http.Response("Server down", 500),
+      );
+      final methodCall = remoteDataSource.getUsers;
 
-    //   expect(
-    //       methodCall(
-    //         createdAt: "createdAt",
-    //         name: "name",
-    //         avatar: "avatar",
-    //       ),
-    //       throwsA(const ApiException(
-    //           message: "Invalid email address", statusCode: 400)));
-    //   verify(
-    //     () => client.post(Uri.parse(kBaseUrl + kCreateUserEndpoint),
-    //         body: jsonEncode({
-    //           "createdAt": "createdAt",
-    //           "name": "name",
-    //           "avatar": "avatar",
-    //         })),
-    //   ).called(1);
-    //   verifyNoMoreInteractions(client);
-    // });
+      expect(
+          methodCall(),
+          throwsA(const ApiException(
+              message: "Server down", statusCode: 500)));
+      verify(
+        () => client.get(Uri.https(kBaseUrl, kGetUserEndpoint,)),).called(1);
+      verifyNoMoreInteractions(client);
+    });
   });
 }

@@ -4,9 +4,9 @@ import 'package:flutter_tdd_clean_architecture/core/utils/typedef.dart';
 import 'package:flutter_tdd_clean_architecture/src/authentication/domain/entity/user.dart';
 import 'package:flutter_tdd_clean_architecture/src/authentication/domain/repository/authentication_repository.dart';
 
-class GetUserUseCase extends UseCaseWithoutParams<List<User>> {
+class GetUsersUseCase extends UseCaseWithoutParams<List<User>> {
   final AuthenticationRepository _repository;
-  GetUserUseCase(
+  GetUsersUseCase(
     this._repository
   );
   @override

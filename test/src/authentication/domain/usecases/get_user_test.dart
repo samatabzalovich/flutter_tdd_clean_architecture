@@ -8,11 +8,11 @@ import 'package:mocktail/mocktail.dart';
 import 'authentication_repository.mock.dart';
 
 void main() {
-  late GetUserUseCase usecase;
+  late GetUsersUseCase usecase;
   late AuthenticationRepository repository;
   setUp(() {
     repository = MockAuthRepo();
-    usecase = GetUserUseCase(repository);
+    usecase = GetUsersUseCase(repository);
   });
   const tResponse = [ User.empty()];
   test("should call [AuthRepo.getUsers] and return [List<Users>]", () async {

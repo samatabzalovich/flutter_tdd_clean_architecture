@@ -53,7 +53,10 @@ class AuthRemoteDataSrcImpl implements AuthenticationRemoteDataSource {
   Future<List<UserModel>> getUsers() async {
     try {
       final response = await _client.get(Uri.https(kBaseUrl, kGetUserEndpoint));
-      
+      if (response.statusCode != 200 && response.statusCode != 201) {
+        throw (ApiException(
+            message: response.body, statusCode: response.statusCode));
+      }
       return List<DataMap>.from(jsonDecode(response.body) as List)
           .map((e) => UserModel.fromMap(e))
           .toList();
